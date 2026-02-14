@@ -10,6 +10,20 @@ const parseKey = (value) => {
   return { row, col };
 };
 
+const buildApiUrl = (path) => {
+  const rawBase = import.meta.env.VITE_API_BASE_URL;
+  if (!rawBase) {
+    return path;
+  }
+
+  const base = rawBase.trim().replace(/^['"]|['"]$/g, '').replace(/\/$/, '');
+  if (!/^https?:\/\//i.test(base)) {
+    throw new Error(`Invalid VITE_API_BASE_URL: "${rawBase}". It must start with http:// or https://`);
+  }
+
+  return `${base}${path}`;
+};
+
 export default function App() {
   const [algorithm, setAlgorithm] = useState('BFS');
   const [rows, setRows] = useState(DEFAULT_ROWS);
@@ -153,8 +167,7 @@ export default function App() {
         walls: Array.from(walls).map(parseKey)
       };
 
-        const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
-        const url = `${API_BASE}/api/runs`;
+        const url = buildApiUrl('/api/runs');
         const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
