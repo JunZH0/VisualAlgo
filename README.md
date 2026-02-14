@@ -20,9 +20,9 @@ Algorithm visualization starter app built with:
   - Algorithm selector
 
 ## Project Structure
-- Backend: `/Users/junzhou/IdeaProjects/VisualAlgo/backend`
-- Frontend: `/Users/junzhou/IdeaProjects/VisualAlgo/frontend`
-- SQL scripts: `/Users/junzhou/IdeaProjects/VisualAlgo/sql`
+- Backend: `/Users/youruser/IdeaProjects/VisualAlgo/backend`
+- Frontend: `/Users/youruser/IdeaProjects/VisualAlgo/frontend`
+- SQL scripts: `/Users/youruser/IdeaProjects/VisualAlgo/sql`
 
 ## Prerequisites
 - JDK 25
@@ -30,7 +30,7 @@ Algorithm visualization starter app built with:
 - Node.js 18+ and npm
 
 ## One-Command Docker Run (Full App)
-From `/Users/junzhou/IdeaProjects/VisualAlgo`:
+From `/Users/youruser/IdeaProjects/VisualAlgo`:
 
 ```bash
 docker compose up -d --build
@@ -48,7 +48,7 @@ docker compose down
 ```
 
 ## 1) Start PostgreSQL (Docker)
-From `/Users/junzhou/IdeaProjects/VisualAlgo`:
+From `/Users/youruser/IdeaProjects/VisualAlgo`:
 
 ```bash
 docker compose up -d postgres
@@ -67,7 +67,7 @@ Notes:
 - `sql/algos.sql` initializes `scenario`, `algorithm_run`, and `algorithm_step`.
 
 ## 2) Run Backend
-From `/Users/junzhou/IdeaProjects/VisualAlgo/backend`:
+From `/Users/youruser/IdeaProjects/VisualAlgo/backend`:
 
 ```bash
 ./mvnw spring-boot:run
@@ -83,7 +83,7 @@ Run tests:
 ```
 
 ## 3) Run Frontend
-From `/Users/junzhou/IdeaProjects/VisualAlgo/frontend`:
+From `/Users/youruser/IdeaProjects/VisualAlgo/frontend`:
 
 ```bash
 npm install
@@ -143,7 +143,7 @@ Vite proxy forwards `/api/*` to backend `http://localhost:8080`.
 - Start DB container:
 
 ```bash
-cd /Users/junzhou/IdeaProjects/VisualAlgo
+cd /Users/youruser/IdeaProjects/VisualAlgo
 docker compose up -d postgres
 docker compose ps
 ```
@@ -156,7 +156,7 @@ docker compose ps
 If you need a clean DB:
 
 ```bash
-cd /Users/junzhou/IdeaProjects/VisualAlgo
+cd /Users/youruser/IdeaProjects/VisualAlgo
 docker compose down -v
 docker compose up -d postgres
 ```
