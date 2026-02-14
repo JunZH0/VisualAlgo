@@ -153,8 +153,9 @@ export default function App() {
         walls: Array.from(walls).map(parseKey)
       };
 
-        const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
-        const response = await fetch(`${API_BASE}/api/runs`, {
+        const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+        const url = `${API_BASE}/api/runs`;
+        const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
