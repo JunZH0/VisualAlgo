@@ -16,6 +16,27 @@ services:
       interval: 5s
       timeout: 5s
       retries: 20
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: visualalgo-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/mydatabase
+      DB_USERNAME: myuser
+      DB_PASSWORD: secret
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: visualalgo-frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
 
 volumes:
   postgres_data:

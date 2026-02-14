@@ -1,7 +1,0 @@
-CREATE TABLE IF NOT EXISTS scenario (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    type VARCHAR(100) NOT NULL,
-    data_json TEXT NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL
-);
