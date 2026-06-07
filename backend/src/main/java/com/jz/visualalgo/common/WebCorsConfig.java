@@ -13,8 +13,8 @@ public class WebCorsConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns(
                         "https://*.onrender.com",
                         "https://*.herokuapp.com",
-                        "http://localhost:5173",
-                        "http://localhost:3000"
+                        "http://localhost*",
+                        "http://127.0.0.1*"
                 )
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*");
