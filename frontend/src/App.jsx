@@ -12,16 +12,18 @@ const parseKey = (value) => {
 
 const buildApiUrl = (path) => {
   const rawBase = import.meta.env.VITE_API_BASE_URL;
-  if (!rawBase) {
-    return path;
-  }
+  const cleaned = (rawBase || '').trim().replace(/^['"]|['"]$/g, '');
 
-  const base = rawBase.trim().replace(/^['"]|['"]$/g, '').replace(/\/$/, '');
-  if (!/^https?:\/\//i.test(base)) {
-    throw new Error(`Invalid VITE_API_BASE_URL: "${rawBase}". It must start with http:// or https://`);
+  try {
+    if (!cleaned) {
+      return new URL(path, window.location.origin).toString();
+    }
+    return new URL(path, cleaned.endsWith('/') ? cleaned : `${cleaned}/`).toString();
+  } catch {
+    throw new Error(
+      `Invalid VITE_API_BASE_URL="${rawBase}". Use a full URL like https://visual-algo-5876e6825fd5.herokuapp.com`
+    );
   }
-
-  return `${base}${path}`;
 };
 
 export default function App() {
@@ -167,8 +169,8 @@ export default function App() {
         walls: Array.from(walls).map(parseKey)
       };
 
-        const url = buildApiUrl('/api/runs');
-        const response = await fetch(url, {
+      const url = buildApiUrl('/api/runs');
+      const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -183,7 +185,7 @@ export default function App() {
       setSteps(data.steps ?? []);
       setStepIndex(0);
       setPlaying(true);
-      setStatus(`${data.algorithm} run loaded with ${data.totalSteps} steps.`);
+      setStatus(`${data.algorithm} run loaded with ${data.totalSteps} steps. URL: ${url}`);
     } catch (error) {
       setStatus(`Error: ${error.message}`);
     } finally {
